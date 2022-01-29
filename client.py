@@ -25,16 +25,16 @@ def handle_messages(connection: socket.socket):
 
 def client() -> None:
     '''
-        Main process that start client connection to the server 
+        Main process that start client connection to the server
         and handle it's input messages
     '''
 
-    SERVER_ADDRESS = '127.0.0.1'
-    SERVER_PORT = 12000
+    SERVER_ADDRESS = '::'
+    SERVER_PORT = 10277
 
     try:
         # Instantiate socket and start connection with server
-        socket_instance = socket.socket()
+        socket_instance = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
         socket_instance.connect((SERVER_ADDRESS, SERVER_PORT))
         # Create a thread in order to handle messages sent by server
         threading.Thread(target=handle_messages, args=[socket_instance]).start()

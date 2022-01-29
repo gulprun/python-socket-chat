@@ -18,7 +18,7 @@ def handle_user_connection(connection: socket.socket, address: str) -> None:
             if msg:
                 # Log message sent by user
                 print(f'{address[0]}:{address[1]} - {msg.decode()}')
-                
+
                 # Build message format and broadcast to users connected on server
                 msg_to_send = f'From {address[0]}:{address[1]} - {msg.decode()}'
                 broadcast(msg_to_send, connection)
@@ -71,16 +71,16 @@ def server() -> None:
         to handle their messages
     '''
 
-    LISTENING_PORT = 12000
-    
+    LISTENING_PORT = 10277
+
     try:
         # Create server and specifying that it can only handle 4 connections by time!
-        socket_instance = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        socket_instance.bind(('', LISTENING_PORT))
+        socket_instance = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+        socket_instance.bind(('::', LISTENING_PORT))
         socket_instance.listen(4)
 
         print('Server running!')
-        
+
         while True:
 
             # Accept client connection
